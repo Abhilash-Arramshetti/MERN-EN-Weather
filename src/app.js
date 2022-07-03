@@ -1,17 +1,19 @@
 const express = require('express')
 const path = require('path')
-const hbs=require('hbs')
+const hbs = require('hbs')
 const app = express()
+
+const port = process.env.PORT || 8000
 //public static path
 const static_path = path.join(__dirname, '../public')
-const template_path=path.join(__dirname,'../templates/views')
-const partial_path=path.join(__dirname,'../templates/partials')
+const template_path = path.join(__dirname, '../templates/views')
+const partial_path = path.join(__dirname, '../templates/partials')
 
 hbs.registerPartials(partial_path)
 app.use(express.static(static_path))
 /*---view Engine-----*/
-app.set('view engine','hbs')
-app.set('views',template_path)
+app.set('view engine', 'hbs')
+app.set('views', template_path)
 //routing
 app.get('/', (req, res) => {
     // res.send('Hello Node!')
@@ -29,6 +31,6 @@ app.get('*', (req, res) => {
     res.render('404error')
 })
 
-app.listen(8000, () => {
+app.listen(port, () => {
     console.log('Listening to port 8000---')
 })
